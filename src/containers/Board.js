@@ -11,7 +11,8 @@ class Board extends React.Component {
             player1Moves:[],
             player2Moves:[],
             winningMessage: "",
-            gameOver: false
+            gameOver: false,
+            counter: 0
         }
         this.changeImage = this.changeImage.bind(this)
         this.resetGame = this.resetGame.bind(this)
@@ -23,13 +24,13 @@ class Board extends React.Component {
             player1Moves:[],
             player2Moves:[],
             winningMessage: "",
-            gameOver: false
+            gameOver: false,
+            counter: 0
         })
         let buttons = document.querySelectorAll('button');
         for (let button of buttons){
             button.className='blank'
         }
-        console.log(this.state);
     }
 
     calculateWinner() {
@@ -43,14 +44,14 @@ class Board extends React.Component {
             [0, 4, 8],
             [2, 4, 6],
         ];
-        console.log(lines[0])
         for(let i = 0; i < lines.length; i++) {
             if (this.state.player1Moves.includes(lines[i][0]) && this.state.player1Moves.includes(lines[i][1]) &&
                 this.state.player1Moves.includes(lines[i][2])) {
                 console.log('Player 1 wins')
                 this.setState({
                     winningMessage: "Astronaut Wins!",
-                    gameOver: true
+                    gameOver: true,
+
                 })
             }
             else if (this.state.player2Moves.includes(lines[i][0]) && this.state.player2Moves.includes(lines[i][1]) &&
@@ -58,7 +59,13 @@ class Board extends React.Component {
                 console.log('Player 2 wins')
                 this.setState({
                     winningMessage: "Alien Wins!",
-                    gameOver: true
+                    gameOver: true,
+                })
+            }
+            else if (this.state.counter === 9 && this.state.winningMessage === ''){
+                this.setState({
+                    winningMessage: "It's a draw!",
+                    gameOver: true,
                 })
             }
         }
@@ -70,7 +77,8 @@ class Board extends React.Component {
             newMoves1.push(id);
             this.setState({
                 xIsNext: false,
-                player1Moves: newMoves1
+                player1Moves: newMoves1,
+                    counter: this.state.counter + 1
             },
                 function(){
                     this.calculateWinner()
@@ -82,7 +90,8 @@ class Board extends React.Component {
             newMoves2.push(id);
             this.setState({
                 xIsNext: true,
-                player2Moves: newMoves2
+                player2Moves: newMoves2,
+                    counter: this.state.counter + 1
          },
                 function(){
                     this.calculateWinner()
