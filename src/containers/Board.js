@@ -9,7 +9,8 @@ class Board extends React.Component {
             xIsNext: true,
             squares: [0, 1, 2, 3, 4, 5, 6, 7, 8],
             player1Moves:[],
-            player2Moves:[]
+            player2Moves:[],
+            winningMessage: ""
         }
         this.changeImage = this.changeImage.bind(this)
     }
@@ -30,10 +31,16 @@ class Board extends React.Component {
             if (this.state.player1Moves.includes(lines[i][0]) && this.state.player1Moves.includes(lines[i][1]) &&
                 this.state.player1Moves.includes(lines[i][2])) {
                 console.log('Player 1 wins')
+                this.setState({
+                    winningMessage: "Astronaut Wins!"
+                })
             }
             else if (this.state.player2Moves.includes(lines[i][0]) && this.state.player2Moves.includes(lines[i][1]) &&
                 this.state.player2Moves.includes(lines[i][2])) {
                 console.log('Player 2 wins')
+                this.setState({
+                    winningMessage: "Alien Wins!"
+                })
             }
         }
     }
@@ -79,6 +86,7 @@ class Board extends React.Component {
                     <Square id={this.state.squares[7]} onSquareClicked={this.changeImage}></Square>
                     <Square id={this.state.squares[8]} onSquareClicked={this.changeImage}></Square>
                 </div>
+                <p>{this.state.winningMessage}</p>
             </div>
 
         )
