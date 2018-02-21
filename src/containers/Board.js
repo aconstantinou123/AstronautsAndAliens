@@ -14,22 +14,50 @@ class Board extends React.Component {
         this.changeImage = this.changeImage.bind(this)
     }
 
-    changeImage(id){
-        console.log(id);
-        //
-
-        if(this.state.xIsNext){
-            this.setState({
-                xIsNext: false
-            })
-            document.getElementById(id).className='cross';
+    calculateWinner() {
+        const lines = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+        console.log(lines[0])
+        for(let i = 0; i < lines.length; i++) {
+            if (this.state.player1Moves.includes(lines[i][0]) && this.state.player1Moves.includes(lines[i][1]) &&
+                this.state.player1Moves.includes(lines[i][2])) {
+                console.log('Player 1 wins')
+            }
+            else if (this.state.player2Moves.includes(lines[i][0]) && this.state.player2Moves.includes(lines[i][1]) &&
+                this.state.player2Moves.includes(lines[i][2])) {
+                console.log('Player 2 wins')
+            }
         }
-        else {
+    }
+
+    changeImage(id){
+        if(this.state.xIsNext){
+            var newMoves1 = this.state.player1Moves.slice();
+            newMoves1.push(id);
             this.setState({
-                xIsNext: true
-         })
+                xIsNext: false,
+                player1Moves: newMoves1
+            })
             document.getElementById(id).className='nought';
         }
+        else {
+            var newMoves2 = this.state.player2Moves.slice();
+            newMoves2.push(id);
+            this.setState({
+                xIsNext: true,
+                player2Moves: newMoves2
+         })
+            document.getElementById(id).className='cross';
+        }
+        this.calculateWinner();
     }
 
     render(){
