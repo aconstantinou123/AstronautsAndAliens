@@ -13,6 +13,21 @@ class Board extends React.Component {
             winningMessage: ""
         }
         this.changeImage = this.changeImage.bind(this)
+        this.resetGame = this.resetGame.bind(this)
+    }
+
+    resetGame(){
+        this.setState({
+            xIsNext: true,
+            player1Moves:[],
+            player2Moves:[],
+            winningMessage: ""
+        })
+        let buttons = document.querySelectorAll('button');
+        for (let button of buttons){
+            button.className='blank'
+        }
+        console.log(this.state);
     }
 
     calculateWinner() {
@@ -52,7 +67,10 @@ class Board extends React.Component {
             this.setState({
                 xIsNext: false,
                 player1Moves: newMoves1
-            })
+            },
+                function(){
+                    this.calculateWinner()
+                })
             document.getElementById(id).className='nought';
         }
         else {
@@ -61,16 +79,18 @@ class Board extends React.Component {
             this.setState({
                 xIsNext: true,
                 player2Moves: newMoves2
-         })
+         },
+                function(){
+                    this.calculateWinner()
+                })
             document.getElementById(id).className='cross';
         }
-        this.calculateWinner();
     }
 
     render(){
         return(
             <div>
-                <h4>Astronauts and Crosses</h4>
+                <h4>Astronauts Vs Aliens</h4>
                 <div className='board-row'>
                     <Square id={this.state.squares[0]} onSquareClicked={this.changeImage}></Square>
                     <Square id={this.state.squares[1]} onSquareClicked={this.changeImage}></Square>
@@ -87,6 +107,7 @@ class Board extends React.Component {
                     <Square id={this.state.squares[8]} onSquareClicked={this.changeImage}></Square>
                 </div>
                 <p>{this.state.winningMessage}</p>
+                <href onClick={this.resetGame}>Play Again</href>
             </div>
 
         )

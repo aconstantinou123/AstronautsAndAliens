@@ -4,7 +4,6 @@ class Square extends Component{
 
 
     handleClick(){
-        // console.log(this.props.id)
         this.props.onSquareClicked(this.props.id);
     }
 
