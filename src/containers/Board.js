@@ -94,7 +94,7 @@ class Board extends React.Component {
     render(){
         return(
             <div>
-                <h4>Astronauts Vs Aliens</h4>
+                <h1>Astronauts Vs Aliens</h1>
                 <div className='board-row'>
                     <Square id={this.state.squares[0]} onSquareClicked={this.changeImage}></Square>
                     <Square id={this.state.squares[1]} onSquareClicked={this.changeImage}></Square>
@@ -110,7 +110,7 @@ class Board extends React.Component {
                     <Square id={this.state.squares[7]} onSquareClicked={this.changeImage}></Square>
                     <Square id={this.state.squares[8]} onSquareClicked={this.changeImage}></Square>
                 </div>
-                <p>{this.state.winningMessage}</p>
+                <h2>{this.state.winningMessage}</h2>
                 <a onClick={this.resetGame}>Play Again</a>
             </div>
 
