@@ -1,26 +1,35 @@
 body {
   margin: 0;
   padding: 0;
+  text-align: left;
+  color: white;
   font-family: sans-serif;
+  background-image: url('1322438 2.jpg');
+  background-size: cover;
 }
 
 .blank{
-  width: 100px;
-  height: 100px;
-  background-color: white;
-  background-size: 100px 100px;
+  width: 150px;
+  height: 150px;
+  background-color: darkslategray;
+  background-size: 150px 150px;
+  opacity: 0.5;
 }
 
 .cross {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-image: url("extraterrestial-head.png");
-  background-size: 100px 100px;
+  background-color: lightgray;
+  background-size: 150px 150px;
+  opacity: 0.5;
 }
 
 .nought {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-image: url("astronaut-ingravity.png");
-  background-size: 100px 100px;
+  background-color: lightgray;
+  background-size: 150px 150px;
+  opacity: 0.5;
 }

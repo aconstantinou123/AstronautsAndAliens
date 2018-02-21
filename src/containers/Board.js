@@ -10,7 +10,8 @@ class Board extends React.Component {
             squares: [0, 1, 2, 3, 4, 5, 6, 7, 8],
             player1Moves:[],
             player2Moves:[],
-            winningMessage: ""
+            winningMessage: "",
+            gameOver: false
         }
         this.changeImage = this.changeImage.bind(this)
         this.resetGame = this.resetGame.bind(this)
@@ -21,7 +22,8 @@ class Board extends React.Component {
             xIsNext: true,
             player1Moves:[],
             player2Moves:[],
-            winningMessage: ""
+            winningMessage: "",
+            gameOver: false
         })
         let buttons = document.querySelectorAll('button');
         for (let button of buttons){
@@ -47,21 +49,23 @@ class Board extends React.Component {
                 this.state.player1Moves.includes(lines[i][2])) {
                 console.log('Player 1 wins')
                 this.setState({
-                    winningMessage: "Astronaut Wins!"
+                    winningMessage: "Astronaut Wins!",
+                    gameOver: true
                 })
             }
             else if (this.state.player2Moves.includes(lines[i][0]) && this.state.player2Moves.includes(lines[i][1]) &&
                 this.state.player2Moves.includes(lines[i][2])) {
                 console.log('Player 2 wins')
                 this.setState({
-                    winningMessage: "Alien Wins!"
+                    winningMessage: "Alien Wins!",
+                    gameOver: true
                 })
             }
         }
     }
 
     changeImage(id){
-        if(this.state.xIsNext){
+        if(this.state.xIsNext && !this.state.gameOver){
             var newMoves1 = this.state.player1Moves.slice();
             newMoves1.push(id);
             this.setState({
@@ -73,7 +77,7 @@ class Board extends React.Component {
                 })
             document.getElementById(id).className='nought';
         }
-        else {
+        else if (!this.state.gameOver) {
             var newMoves2 = this.state.player2Moves.slice();
             newMoves2.push(id);
             this.setState({
@@ -107,7 +111,7 @@ class Board extends React.Component {
                     <Square id={this.state.squares[8]} onSquareClicked={this.changeImage}></Square>
                 </div>
                 <p>{this.state.winningMessage}</p>
-                <href onClick={this.resetGame}>Play Again</href>
+                <a onClick={this.resetGame}>Play Again</a>
             </div>
 
         )
